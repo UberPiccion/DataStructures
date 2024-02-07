@@ -85,5 +85,7 @@ typedef struct dictionary1
 
 dictionary *create_dictionary(const size_t hashmap_size);
 dictionary_item *dict_insert_item(dictionary *dic,char* key, char* value);
+dictionary_item *dict_find_item(dictionary *dic,char* key);
+void dict_remove_item(dictionary *dic,char* key);
 
 #endif //DICTIONARY_H

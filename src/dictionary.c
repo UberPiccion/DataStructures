@@ -14,3 +14,23 @@ dictionary *create_dictionary(const size_t hashmap_size){
     dict->items = calloc(hashmap_size,sizeof(dictionary_item));
     return dict;
 }
+
+dictionary_item *dict_find_item(dictionary *dic,char* key){
+    const size_t key_len = strlen(key);
+    size_t hash = djb33x_hash(key, key_len);
+    size_t index = hash % dic->keyset->hashmap_size;
+    for(size_t i = 0; i < dic->keyset->hashmap_size;i++){
+        if(dic->items[index]->key == key){
+            return dic->items[index];
+        }
+    }
+    return NULL;
+}
+
+
+void dict_remove_item(dictionary *dic,char* key){
+    free(dict_find_item(dic,key));
+    free(set_find(dic->keyset,key));
+}
+
+
